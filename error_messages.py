@@ -16,11 +16,6 @@ class ErrorMessages:
         return f'Could not compare {what} locations and sizes on {where}.'
 
     @staticmethod
-    def element_parameters_not_match(what, where, expected_result, actual_result):
-        return f'{what} on {where} does not match the expected result. ' \
-               f'{ErrorMessages.expected_actual_result(expected_result, actual_result)}'
-
-    @staticmethod
     def wrong_url(expected_url, actual_url):
         return f'Wrong page URL, expected: {expected_url}, but got {actual_url}'
 
@@ -31,3 +26,12 @@ class ErrorMessages:
     @staticmethod
     def region_does_not_match_expected(where, expected_region, actual_region):
         return f'Incorrect region in {where}. Expected: {expected_region}, Actual: {actual_region}'
+
+    @staticmethod
+    def actual_file_size_is_different_from_expected(where, file_name, expected_size, actual_size):
+        return f'Actual downloaded file {file_name} is different from expected is stated on the page. ' \
+               f'Expected: {expected_size}, Actual: {actual_size}'
+
+    @staticmethod
+    def timeout_could_not_download_file(file_name, timeout_seconds):
+        return f'Timeout! Could not download the file {file_name} in {timeout_seconds} seconds'

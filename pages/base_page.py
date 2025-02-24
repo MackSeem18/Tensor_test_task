@@ -1,9 +1,12 @@
+import os
+import time
+
+from selenium.webdriver import ActionChains
 from selenium.common import NoSuchElementException, ElementClickInterceptedException, TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
 from error_messages import ErrorMessages as Em
-from selenium.webdriver import ActionChains
 
 
 class BasePage:
@@ -68,5 +71,24 @@ class BasePage:
         actual_url = self.browser.current_url
         assert actual_url == expected_url, \
             Em.wrong_url(expected_url, actual_url)
+
+    @staticmethod
+    def get_downloaded_file_size(file_name, time_to_download):
+        path_to_file = fr'{os.getcwd()}\tmp\{file_name}'
+        timeout_seconds = 0
+        while timeout_seconds < time_to_download:
+            try:
+                file_size = os.path.getsize(path_to_file)
+                return file_size
+            except FileNotFoundError:
+                time.sleep(1)
+                timeout_seconds += 1
+        return False
+
+
+
+
+
+
 
 

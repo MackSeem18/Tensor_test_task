@@ -1,4 +1,5 @@
 .idea
+tmp
 /test_pages/.pytest_cache/
 /allure-results/
 /.pytest_cache/

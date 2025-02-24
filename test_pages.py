@@ -3,8 +3,10 @@ import allure
 
 from pages.sbis_pages.main_page import SbisMainPage
 from pages.sbis_pages.contacts_page import SbisContactsPage
+from pages.sbis_pages.download_page import SbisDownloadPage
 from pages.tensor_pages.about_page import TensorAboutPage
 from pages.tensor_pages.main_page import TensorMainPage
+
 
 @allure.story("Задание 1")
 def test_one(browser):
@@ -47,3 +49,16 @@ def test_two(browser):
         page.should_be_expected_region_in_url("41-kamchatskij-kraj")
         page.should_be_expected_region_in_tab_title("Камчатский край")
         page.should_be_expected_region_partners("Петропавловск-Камчатский")
+
+
+@allure.story("Задание 3")
+def test_three(browser):
+    with allure.step('Открываем https://sbis.ru'):
+        link = "https://sbis.ru/"
+        page = SbisMainPage(browser, link)
+        page.open()
+    with allure.step('Переходим на страницу загрузки'):
+        page.go_to_download_page()
+        page = SbisDownloadPage(browser, link)
+    with allure.step('Скачиваем и проверяем файл'):
+        page.download_file_and_check_size()
